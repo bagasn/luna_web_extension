@@ -1,0 +1,32 @@
+{
+  "en": [
+    "app_lunaposBrandingText",
+    "title_selectDateRange",
+    "title_selectItem",
+    "title_filter",
+    "btn_needHelp",
+    "btn_refresh",
+    "btn_save",
+    "btn_clear",
+    "btn_showDetail",
+    "btn_submit",
+    "btn_apply",
+    "btn_seeAll",
+    "btn_edit",
+    "btn_add",
+    "btn_delete",
+    "btn_skip",
+    "txt_server",
+    "txt_open",
+    "txt_closed",
+    "txt_paid",
+    "lbl_shortTrillion",
+    "lbl_shortBillion",
+    "lbl_shortMillion",
+    "lbl_shortThousand",
+    "lbl_firstName",
+    "lbl_lastName",
+    "lbl_pickImage",
+    "err_invalidEmail"
+  ]
+}
