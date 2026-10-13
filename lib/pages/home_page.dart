@@ -19,6 +19,15 @@ class _HomeView extends StatefulWidget {
 class __HomeViewState extends State<_HomeView> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold();
+    return Scaffold(
+      body: Row(
+        mainAxisSize: MainAxisSize.max,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(flex: 1, child: Container(color: Colors.blue)),
+          Expanded(flex: 2, child: Container(color: Colors.green)),
+        ],
+      ),
+    );
   }
 }
