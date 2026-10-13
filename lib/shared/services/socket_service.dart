@@ -7,12 +7,17 @@ import 'package:injectable/injectable.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
+import 'package:web_extension/shared/services/printer_service.dart';
 import 'package:web_extension/shared/utilities/date_formatter.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 @singleton
 class WebSocketService extends ChangeNotifier {
+  WebSocketService(this._printerService);
+
+  final PrinterService _printerService;
+
   HttpServer? _server;
   bool get isRunning => _server != null;
 
@@ -51,7 +56,7 @@ class WebSocketService extends ChangeNotifier {
 
           return wsHandler(request);
         },
-        InternetAddress.anyIPv4,
+        InternetAddress.loopbackIPv4,
         port,
       );
       addConsoleLog('Server is running in port: $port');
@@ -67,24 +72,30 @@ class WebSocketService extends ChangeNotifier {
   }) async {
     try {
       final body = jsonDecode(data);
-      final targetIp = body['targetIp'];
-      final printBytes = (body['bytes'] as List).cast<int>();
+      final targetIp = body['targetIp'] as String?;
+      final port = (body['port'] as int?) ?? PrinterService.defaultPort;
+      final printBytes = ((body['bytes'] as List?) ?? const []).cast<int>();
 
       addConsoleLog('Get request for printing into address: $targetIp');
 
-      final socket = await Socket.connect(
-        targetIp,
-        9100,
-        timeout: const Duration(seconds: 5),
+      await _printerService.printBytes(
+        ip: targetIp ?? '',
+        port: port,
+        bytes: printBytes,
       );
-
-      socket.add(printBytes);
-      await socket.flush();
-      await socket.close();
 
       addConsoleLog('Successfully printing data into address $targetIp');
 
       channel.sink.add(jsonEncode({'status': 'print success'}));
+    } on PrintException catch (error) {
+      addConsoleLog('Failure: ${error.message}');
+      channel.sink.add(
+        jsonEncode({
+          'status': 'Failed',
+          'message': error.message,
+          'code': error.failure.name,
+        }),
+      );
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       addConsoleLog('Failure: $error');

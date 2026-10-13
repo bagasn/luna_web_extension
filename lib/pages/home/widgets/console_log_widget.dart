@@ -50,7 +50,11 @@ class _ConsoleLogWidgetState extends State<ConsoleLogWidget> {
             style: style.copyWith(color: AppColors.charcoal500),
           ),
           Expanded(
-            child: Text(log.message, style: style.copyWith(color: Colors.blue)),
+            child: SelectableText(
+              log.message,
+              selectionColor: Colors.white,
+              style: style.copyWith(color: Colors.blue),
+            ),
           ),
         ],
       ),

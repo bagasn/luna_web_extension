@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i526;
 
 import '../../pages/home/cubit/home_cubit.dart' as _i229;
 import '../../shared/services/language_service.dart' as _i480;
+import '../../shared/services/printer_service.dart' as _i519;
 import '../../shared/services/socket_service.dart' as _i1024;
 import '../local_storage/session_manager.dart' as _i671;
 import '../local_storage/setting_preferences.dart' as _i329;
@@ -27,15 +28,18 @@ extension GetItInjectableX on _i174.GetIt {
   }) {
     final gh = _i526.GetItHelper(this, environment, environmentFilter);
     gh.singleton<_i329.SettingPreferences>(() => _i329.SettingPreferences());
-    gh.singleton<_i1024.WebSocketService>(() => _i1024.WebSocketService());
-    gh.factory<_i229.HomeCubit>(
-      () => _i229.HomeCubit(socketService: gh<_i1024.WebSocketService>()),
-    );
+    gh.singleton<_i519.PrinterService>(() => _i519.PrinterService());
     gh.singleton<_i671.SessionManager>(
       () => _i671.SessionManager(setting: gh<_i329.SettingPreferences>()),
     );
+    gh.singleton<_i1024.WebSocketService>(
+      () => _i1024.WebSocketService(gh<_i519.PrinterService>()),
+    );
     gh.singleton<_i480.LanguageService>(
       () => _i480.LanguageService(gh<_i329.SettingPreferences>()),
+    );
+    gh.factory<_i229.HomeCubit>(
+      () => _i229.HomeCubit(socketService: gh<_i1024.WebSocketService>()),
     );
     return this;
   }
