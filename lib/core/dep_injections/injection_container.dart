@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:logger/logger.dart';
+import 'package:web_extension/core/dep_injections/injection_container.config.dart';
 
 final locator = GetIt.instance;
 
@@ -23,6 +24,7 @@ Future<void> configureDependencies() async {
   );
 
   locator.registerSingleton(logger);
+  locator.init();
 }
 
 final _logLevelColorsDefault = {

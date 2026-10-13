@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
@@ -11,7 +12,7 @@ import 'package:web_extension/shared/utilities/log_util.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
 @singleton
-class WebSocketService {
+class WebSocketService extends ChangeNotifier {
   HttpServer? _server;
   bool get isRunning => _server != null;
 
@@ -107,6 +108,8 @@ class WebSocketService {
       _consoleLogs.add(ConsoleLogModel(createAt: dateValue, message: message));
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
+    } finally {
+      notifyListeners();
     }
   }
 }
