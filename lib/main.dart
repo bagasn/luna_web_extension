@@ -5,7 +5,6 @@ import 'package:web_extension/core/dep_injections/injection_container.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // await initDependencyInjections();
   await configureDependencies();
 
   runApp(const LunaposApp());

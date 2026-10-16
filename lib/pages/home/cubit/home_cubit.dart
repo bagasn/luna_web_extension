@@ -49,12 +49,11 @@ class HomeCubit extends Cubit<HomeState> {
         ...generator.text('Test Print'),
         ...generator.text('Test Print'),
         ...generator.text('Test Print'),
-        ...generator.text('Test Print'),
-        ...generator.text('Test Print'),
-        ...generator.text('Test Print'),
         ...generator.feed(2),
         ...generator.cut(),
       ];
+
+      _socketService.addConsoleLog('Test print into $ipAddress:9100');
 
       final socket = await Socket.connect(
         ipAddress,
@@ -69,8 +68,7 @@ class HomeCubit extends Cubit<HomeState> {
       _socketService.addConsoleLog('Print is Success');
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
-      _socketService.addConsoleLog('Test Print Failed:\n$error');
-      _socketService.addConsoleLog(stackTrace.toString());
+      _socketService.addConsoleLog('Test Print Failed.\n$error');
     }
   }
 }
