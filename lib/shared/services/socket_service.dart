@@ -72,26 +72,29 @@ class WebSocketService extends ChangeNotifier {
   }) async {
     try {
       final body = jsonDecode(data);
-      final targetIp = body['targetIp'] as String?;
-      final port = (body['port'] as int?) ?? PrinterService.defaultPort;
+      final targetIp = body['ipAddress'] as String?;
       final printBytes = ((body['bytes'] as List?) ?? const []).cast<int>();
 
       addConsoleLog('Get request for printing into address: $targetIp');
 
-      await _printerService.printBytes(
-        ip: targetIp ?? '',
-        port: port,
-        bytes: printBytes,
+      final socket = await Socket.connect(
+        targetIp,
+        9100,
+        timeout: const Duration(seconds: 5),
       );
+
+      socket.add(printBytes);
+      await socket.flush();
+      await socket.close();
 
       addConsoleLog('Successfully printing data into address $targetIp');
 
-      channel.sink.add(jsonEncode({'status': 'print success'}));
+      channel.sink.add(jsonEncode({'status': 'success'}));
     } on PrintException catch (error) {
       addConsoleLog('Failure: ${error.message}');
       channel.sink.add(
         jsonEncode({
-          'status': 'Failed',
+          'status': 'failed',
           'message': error.message,
           'code': error.failure.name,
         }),
@@ -100,7 +103,7 @@ class WebSocketService extends ChangeNotifier {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       addConsoleLog('Failure: $error');
       channel.sink.add(
-        jsonEncode({'status': 'Failed', 'message': error.toString()}),
+        jsonEncode({'status': 'failed', 'message': error.toString()}),
       );
     }
   }

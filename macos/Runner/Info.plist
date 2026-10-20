@@ -29,6 +29,6 @@
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>NSLocalNetworkUsageDescription</key>
-	<string>Aplikasi membutuhkan akses jaringan lokal untuk mengirim perintah cetak ke Printer Thermal.</string>
+	<string>To send data to printer device</string>
 </dict>
 </plist>

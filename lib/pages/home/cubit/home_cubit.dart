@@ -38,6 +38,9 @@ class HomeCubit extends Cubit<HomeState> {
 
   void onTestPrint(String ipAddress) async {
     final printer = locator<PrinterService>();
+
+    _socketService.addConsoleLog('Test print into $ipAddress:9100');
+
     try {
       // await printer.checkConnection(ipAddress);
       // _socketService.addConsoleLog('Test connection to $ipAddress is success');
@@ -52,8 +55,6 @@ class HomeCubit extends Cubit<HomeState> {
         ...generator.feed(2),
         ...generator.cut(),
       ];
-
-      _socketService.addConsoleLog('Test print into $ipAddress:9100');
 
       final socket = await Socket.connect(
         ipAddress,
