@@ -158,6 +158,24 @@ abstract class AppLocalizations {
   /// **'Printer Network (LAN)'**
   String get title_networkPrinter;
 
+  /// No description provided for @title_serverPrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Server Printer'**
+  String get title_serverPrinter;
+
+  /// No description provided for @title_serverStatus.
+  ///
+  /// In id, this message translates to:
+  /// **'Status Server'**
+  String get title_serverStatus;
+
+  /// No description provided for @title_consoleLog.
+  ///
+  /// In id, this message translates to:
+  /// **'Console Log'**
+  String get title_consoleLog;
+
   /// No description provided for @btn_needHelp.
   ///
   /// In id, this message translates to:
@@ -260,6 +278,18 @@ abstract class AppLocalizations {
   /// **'Test Print'**
   String get btn_testPrint;
 
+  /// No description provided for @btn_startServer.
+  ///
+  /// In id, this message translates to:
+  /// **'Jalankan Server'**
+  String get btn_startServer;
+
+  /// No description provided for @btn_stopServer.
+  ///
+  /// In id, this message translates to:
+  /// **'Hentikan Server'**
+  String get btn_stopServer;
+
   /// No description provided for @txt_server.
   ///
   /// In id, this message translates to:
@@ -290,6 +320,12 @@ abstract class AppLocalizations {
   /// **'Atur perangkat printer Bluetooth dan USB yang aktif, serta lakukan uji cetak (Test Print).'**
   String get txt_printerSettingSubtitle;
 
+  /// No description provided for @txt_serverPrinterSubtitle.
+  ///
+  /// In id, this message translates to:
+  /// **'Kelola koneksi server WebSocket lokal dan pantau log aktivitas pencetakan.'**
+  String get txt_serverPrinterSubtitle;
+
   /// No description provided for @txt_noActivePrinter.
   ///
   /// In id, this message translates to:
@@ -313,6 +349,12 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Koneksi Network tidak perlu diatur sebagai perangkat aktif. Masukkan alamat IP printer untuk melakukan Test Print.'**
   String get txt_networkPrinterDesc;
+
+  /// No description provided for @txt_noConsoleLogs.
+  ///
+  /// In id, this message translates to:
+  /// **'Belum ada aktivitas log.'**
+  String get txt_noConsoleLogs;
 
   /// No description provided for @lbl_shortTrillion.
   ///
@@ -373,6 +415,24 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Aktif'**
   String get lbl_active;
+
+  /// No description provided for @lbl_serverStatus.
+  ///
+  /// In id, this message translates to:
+  /// **'Status Server'**
+  String get lbl_serverStatus;
+
+  /// No description provided for @lbl_running.
+  ///
+  /// In id, this message translates to:
+  /// **'Berjalan'**
+  String get lbl_running;
+
+  /// No description provided for @lbl_stopped.
+  ///
+  /// In id, this message translates to:
+  /// **'Berhenti'**
+  String get lbl_stopped;
 
   /// No description provided for @lbl_serverPort.
   ///

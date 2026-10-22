@@ -19,7 +19,7 @@ class NetworkPrinterSectionWidget extends StatefulWidget {
 
 class _NetworkPrinterSectionWidgetState
     extends State<NetworkPrinterSectionWidget> {
-  final _ipTextPrint = TextEditingController(text: '192.168.0.111');
+  final _ipTextPrint = TextEditingController();
 
   @override
   void dispose() {
@@ -113,4 +113,3 @@ class _NetworkPrinterSectionWidgetState
     );
   }
 }
-

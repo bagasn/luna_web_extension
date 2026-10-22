@@ -42,6 +42,15 @@ class AppLocalizationsEn extends AppLocalizations {
   String get title_networkPrinter => 'Network Printer (LAN)';
 
   @override
+  String get title_serverPrinter => 'Printer Server';
+
+  @override
+  String get title_serverStatus => 'Server Status';
+
+  @override
+  String get title_consoleLog => 'Console Log';
+
+  @override
   String get btn_needHelp => 'Butuh Bantuan';
 
   @override
@@ -93,6 +102,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get btn_testPrint => 'Test Print';
 
   @override
+  String get btn_startServer => 'Start Server';
+
+  @override
+  String get btn_stopServer => 'Stop Server';
+
+  @override
   String get txt_server => 'Server';
 
   @override
@@ -109,6 +124,10 @@ class AppLocalizationsEn extends AppLocalizations {
       'Configure active Bluetooth and USB printer devices, and run test prints.';
 
   @override
+  String get txt_serverPrinterSubtitle =>
+      'Manage the local WebSocket server connection and monitor printing activity logs.';
+
+  @override
   String get txt_noActivePrinter =>
       'No printer device is currently set as active.';
 
@@ -122,6 +141,9 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get txt_networkPrinterDesc =>
       'Network connection does not need to be set as an active device. Enter the printer IP address to run a Test Print.';
+
+  @override
+  String get txt_noConsoleLogs => 'No log activity yet.';
 
   @override
   String get lbl_shortTrillion => 'T';
@@ -152,6 +174,15 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lbl_active => 'Active';
+
+  @override
+  String get lbl_serverStatus => 'Server Status';
+
+  @override
+  String get lbl_running => 'Running';
+
+  @override
+  String get lbl_stopped => 'Stopped';
 
   @override
   String get lbl_serverPort => 'Server Port';
