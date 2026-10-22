@@ -2,7 +2,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_extension/core/local_storage/setting_preferences.dart';
-import 'package:web_extension/shared/services/socket_service.dart';
+import 'package:web_extension/shared/services/web_socket_service.dart';
 
 part 'home_state.dart';
 
@@ -15,10 +15,8 @@ class HomeCubit extends Cubit<HomeState> {
   final WebSocketService _socketService;
   final SettingPreferences _settingPreferences;
 
-  HomeCubit({
-    required this._socketService,
-    required this._settingPreferences,
-  }) : super(HomeState(isServerRunning: false)) {
+  HomeCubit({required this._socketService, required this._settingPreferences})
+    : super(HomeState(isServerRunning: false)) {
     if (_socketService.isRunning) {
       emit(state.copyWith(isServerRunning: true));
     }

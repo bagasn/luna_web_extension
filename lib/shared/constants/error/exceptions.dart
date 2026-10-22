@@ -1,4 +1,6 @@
 enum PrintErrorType {
+  invalidPrinterType,
+  noActiveDevice,
   invalidAddress,
   invalidPort,
   emptyData,

@@ -8,7 +8,7 @@ import 'package:web_extension/shared/data/printer_device.dart';
 import 'package:web_extension/shared/services/printer/bluetooth_printer_service.dart';
 import 'package:web_extension/shared/services/printer/network_printer_service.dart';
 import 'package:web_extension/shared/services/printer/usb_printer_service.dart';
-import 'package:web_extension/shared/services/socket_service.dart';
+import 'package:web_extension/shared/services/web_socket_service.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 
 part 'setting_event.dart';

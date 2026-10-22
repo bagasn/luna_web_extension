@@ -55,28 +55,42 @@ class BluetoothPrinterService {
     await printerPlugin.stopScan();
   }
 
-  Future<void> printBytes(List<int> bytes) async {
+  void _validateBytes(List<int> bytes) {
     if (bytes.isEmpty) {
       throw const PrintException(
         PrintErrorType.emptyData,
         'Print data is empty',
       );
     }
+    if (bytes.any((b) => b < 0 || b > 255)) {
+      throw const PrintException(
+        PrintErrorType.invalidData,
+        'Print data contains values outside 0-255',
+      );
+    }
+  }
 
+  Future<PrinterDevice> requireActiveDevice() async {
     final activeDevice = await _preference.getActiveDevice();
     if (activeDevice == null) {
       throw const PrintException(
-        PrintErrorType.invalidAddress,
+        PrintErrorType.noActiveDevice,
         'Belum ada printer Bluetooth yang aktif',
       );
     }
+    return activeDevice;
+  }
 
+  Future<void> printBytes(List<int> bytes) async {
+    _validateBytes(bytes);
+
+    final activeDevice = await requireActiveDevice();
     final printer = _toPrinter(activeDevice);
     final isConnected = await printerPlugin.connect(printer);
     if (!isConnected) {
       throw PrintException(
         PrintErrorType.unreachable,
-        'Printer Bluetooth ${activeDevice.name} tidak terjangkau',
+        'Printer Bluetooth ${activeDevice.name} (${activeDevice.address}) tidak terjangkau',
       );
     }
 
@@ -84,18 +98,15 @@ class BluetoothPrinterService {
       await printerPlugin.printData(printer, bytes, longData: true);
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
-      throw PrintException(PrintErrorType.sendFailed, error.toString());
+      throw PrintException(
+        PrintErrorType.sendFailed,
+        'Gagal mengirim data cetak ke printer Bluetooth ${activeDevice.name}: $error',
+      );
     }
   }
 
   Future<void> testPrint() async {
-    final activeDevice = await _preference.getActiveDevice();
-    if (activeDevice == null) {
-      throw const PrintException(
-        PrintErrorType.invalidAddress,
-        'Belum ada printer Bluetooth yang aktif',
-      );
-    }
+    final activeDevice = await requireActiveDevice();
 
     final profile = await CapabilityProfile.load();
     final generator = Generator(PaperSize.mm58, profile);

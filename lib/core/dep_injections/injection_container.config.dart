@@ -19,7 +19,7 @@ import '../../shared/services/language_service.dart' as _i480;
 import '../../shared/services/printer/bluetooth_printer_service.dart' as _i565;
 import '../../shared/services/printer/network_printer_service.dart' as _i969;
 import '../../shared/services/printer/usb_printer_service.dart' as _i385;
-import '../../shared/services/socket_service.dart' as _i1024;
+import '../../shared/services/web_socket_service.dart' as _i1037;
 import '../local_storage/printer_bluetooth_preferences.dart' as _i242;
 import '../local_storage/printer_usb_preferences.dart' as _i248;
 import '../local_storage/session_manager.dart' as _i671;
@@ -50,17 +50,6 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i385.UsbPrinterService>(
       () => _i385.UsbPrinterService(gh<_i248.PrinterUsbDevicePreferences>()),
     );
-    gh.singleton<_i1024.WebSocketService>(
-      () => _i1024.WebSocketService(gh<_i969.NetworkPrinterService>()),
-    );
-    gh.factory<_i335.SettingBloc>(
-      () => _i335.SettingBloc(
-        gh<_i565.BluetoothPrinterService>(),
-        gh<_i385.UsbPrinterService>(),
-        gh<_i969.NetworkPrinterService>(),
-        gh<_i1024.WebSocketService>(),
-      ),
-    );
     gh.singleton<_i671.SessionManager>(
       () => _i671.SessionManager(
         setting: gh<_i329.SettingPreferences>(),
@@ -71,9 +60,24 @@ extension GetItInjectableX on _i174.GetIt {
     gh.singleton<_i480.LanguageService>(
       () => _i480.LanguageService(gh<_i329.SettingPreferences>()),
     );
+    gh.singleton<_i1037.WebSocketService>(
+      () => _i1037.WebSocketService(
+        gh<_i969.NetworkPrinterService>(),
+        gh<_i565.BluetoothPrinterService>(),
+        gh<_i385.UsbPrinterService>(),
+      ),
+    );
+    gh.factory<_i335.SettingBloc>(
+      () => _i335.SettingBloc(
+        gh<_i565.BluetoothPrinterService>(),
+        gh<_i385.UsbPrinterService>(),
+        gh<_i969.NetworkPrinterService>(),
+        gh<_i1037.WebSocketService>(),
+      ),
+    );
     gh.factory<_i239.HomeCubit>(
       () => _i239.HomeCubit(
-        socketService: gh<_i1024.WebSocketService>(),
+        socketService: gh<_i1037.WebSocketService>(),
         settingPreferences: gh<_i329.SettingPreferences>(),
       ),
     );

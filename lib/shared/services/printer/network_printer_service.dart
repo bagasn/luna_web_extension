@@ -83,6 +83,16 @@ class NetworkPrinterService {
     }
 
     try {
+      // final socket = await Socket.connect(
+      //   targetIp,
+      //   9100,
+      //   timeout: const Duration(seconds: 5),
+      // );
+
+      // socket.add(printBytes);
+      // await socket.flush();
+      // await socket.close();
+
       final printer = FlutterThermalPrinterNetwork(
         address,
         port: port,
@@ -101,10 +111,7 @@ class NetworkPrinterService {
   }
 
   /// Generates a test print receipt and prints it to the specified IP address.
-  Future<void> testPrint({
-    required String ip,
-    int port = defaultPort,
-  }) async {
+  Future<void> testPrint({required String ip, int port = defaultPort}) async {
     final profile = await CapabilityProfile.load();
     final generator = Generator(PaperSize.mm58, profile);
 

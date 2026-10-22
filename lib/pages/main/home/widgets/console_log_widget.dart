@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:web_extension/core/dep_injections/injection_container.dart';
 import 'package:web_extension/generated/colors.gen.dart';
 import 'package:web_extension/l10n/app_localizations.dart';
-import 'package:web_extension/shared/services/socket_service.dart';
+import 'package:web_extension/shared/services/web_socket_service.dart';
 
 class ConsoleLogWidget extends StatefulWidget {
   const new({super.key});
