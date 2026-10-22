@@ -5,6 +5,7 @@ import 'package:web_extension/generated/assets.gen.dart';
 import 'package:web_extension/generated/colors.gen.dart';
 import 'package:web_extension/pages/main/home/cubit/home_cubit.dart';
 import 'package:web_extension/pages/main/home/home_view.dart';
+import 'package:web_extension/pages/main/setting/bloc/setting_bloc.dart';
 import 'package:web_extension/pages/main/setting/setting_nav_view.dart';
 
 class MainPage extends StatelessWidget {
@@ -13,7 +14,13 @@ class MainPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (context) => locator<HomeCubit>())],
+      providers: [
+        BlocProvider(create: (context) => locator<HomeCubit>()),
+        BlocProvider(
+          create: (context) =>
+              locator<SettingBloc>()..add(const LoadSettingEvent()),
+        ),
+      ],
       child: _MainView(),
     );
   }

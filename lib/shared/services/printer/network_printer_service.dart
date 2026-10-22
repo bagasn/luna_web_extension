@@ -83,8 +83,6 @@ class NetworkPrinterService {
     }
 
     try {
-      await checkConnection(address, port: port);
-
       final printer = FlutterThermalPrinterNetwork(
         address,
         port: port,
@@ -100,5 +98,38 @@ class NetworkPrinterService {
     } finally {
       _busyPrinters.remove(key);
     }
+  }
+
+  /// Generates a test print receipt and prints it to the specified IP address.
+  Future<void> testPrint({
+    required String ip,
+    int port = defaultPort,
+  }) async {
+    final profile = await CapabilityProfile.load();
+    final generator = Generator(PaperSize.mm58, profile);
+
+    final bytes = <int>[
+      ...generator.text(
+        'LUNA POS',
+        styles: const PosStyles(
+          align: PosAlign.center,
+          bold: true,
+          height: PosTextSize.size2,
+          width: PosTextSize.size2,
+        ),
+      ),
+      ...generator.text(
+        'Test Print (Network)',
+        styles: const PosStyles(align: PosAlign.center),
+      ),
+      ...generator.text(
+        'IP: ${ip.trim()}:$port',
+        styles: const PosStyles(align: PosAlign.center),
+      ),
+      ...generator.feed(1),
+      ...generator.cut(),
+    ];
+
+    await printBytes(ip: ip, port: port, bytes: bytes);
   }
 }

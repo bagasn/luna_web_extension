@@ -1,5 +1,23 @@
 {
   "@@locale": "en",
   "app_name": "Printer Extension",
-  "app_copyright": "© 2026 - PT LUNA Aplikasi Indonesia. All rights reserved."
+  "app_copyright": "© 2026 - PT LUNA Aplikasi Indonesia. All rights reserved.",
+  "title_printerSetting": "Printer Settings",
+  "title_bluetoothPrinter": "Bluetooth Printer",
+  "title_usbPrinter": "USB Printer",
+  "title_networkPrinter": "Network Printer (LAN)",
+  "btn_scanPrinter": "Scan Devices",
+  "btn_stopScan": "Stop Scan",
+  "btn_setActive": "Set Active",
+  "btn_removeActive": "Remove Active",
+  "btn_testPrint": "Test Print",
+  "txt_printerSettingSubtitle": "Configure active Bluetooth and USB printer devices, and run test prints.",
+  "txt_noActivePrinter": "No printer device is currently set as active.",
+  "txt_noScannedDevices": "No devices found yet. Press Scan to search for devices.",
+  "txt_scanningDevices": "Scanning for printer devices...",
+  "txt_networkPrinterDesc": "Network connection does not need to be set as an active device. Enter the printer IP address to run a Test Print.",
+  "lbl_activeDevice": "Active Device",
+  "lbl_availableDevices": "Available Devices",
+  "lbl_active": "Active",
+  "lbl_ipAddress": "IP Address"
 }

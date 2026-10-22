@@ -134,6 +134,30 @@ abstract class AppLocalizations {
   /// **'Filter'**
   String get title_filter;
 
+  /// No description provided for @title_printerSetting.
+  ///
+  /// In id, this message translates to:
+  /// **'Pengaturan Printer'**
+  String get title_printerSetting;
+
+  /// No description provided for @title_bluetoothPrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Printer Bluetooth'**
+  String get title_bluetoothPrinter;
+
+  /// No description provided for @title_usbPrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Printer USB'**
+  String get title_usbPrinter;
+
+  /// No description provided for @title_networkPrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Printer Network (LAN)'**
+  String get title_networkPrinter;
+
   /// No description provided for @btn_needHelp.
   ///
   /// In id, this message translates to:
@@ -206,6 +230,36 @@ abstract class AppLocalizations {
   /// **'Lewati'**
   String get btn_skip;
 
+  /// No description provided for @btn_scanPrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Scan Perangkat'**
+  String get btn_scanPrinter;
+
+  /// No description provided for @btn_stopScan.
+  ///
+  /// In id, this message translates to:
+  /// **'Hentikan Scan'**
+  String get btn_stopScan;
+
+  /// No description provided for @btn_setActive.
+  ///
+  /// In id, this message translates to:
+  /// **'Jadikan Aktif'**
+  String get btn_setActive;
+
+  /// No description provided for @btn_removeActive.
+  ///
+  /// In id, this message translates to:
+  /// **'Hapus Aktif'**
+  String get btn_removeActive;
+
+  /// No description provided for @btn_testPrint.
+  ///
+  /// In id, this message translates to:
+  /// **'Test Print'**
+  String get btn_testPrint;
+
   /// No description provided for @txt_server.
   ///
   /// In id, this message translates to:
@@ -229,6 +283,36 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Dibayar'**
   String get txt_paid;
+
+  /// No description provided for @txt_printerSettingSubtitle.
+  ///
+  /// In id, this message translates to:
+  /// **'Atur perangkat printer Bluetooth dan USB yang aktif, serta lakukan uji cetak (Test Print).'**
+  String get txt_printerSettingSubtitle;
+
+  /// No description provided for @txt_noActivePrinter.
+  ///
+  /// In id, this message translates to:
+  /// **'Belum ada perangkat printer yang dipilih sebagai aktif.'**
+  String get txt_noActivePrinter;
+
+  /// No description provided for @txt_noScannedDevices.
+  ///
+  /// In id, this message translates to:
+  /// **'Belum ada perangkat ditemukan. Tekan tombol Scan untuk mencari perangkat.'**
+  String get txt_noScannedDevices;
+
+  /// No description provided for @txt_scanningDevices.
+  ///
+  /// In id, this message translates to:
+  /// **'Sedang mencari perangkat printer...'**
+  String get txt_scanningDevices;
+
+  /// No description provided for @txt_networkPrinterDesc.
+  ///
+  /// In id, this message translates to:
+  /// **'Koneksi Network tidak perlu diatur sebagai perangkat aktif. Masukkan alamat IP printer untuk melakukan Test Print.'**
+  String get txt_networkPrinterDesc;
 
   /// No description provided for @lbl_shortTrillion.
   ///
@@ -271,6 +355,30 @@ abstract class AppLocalizations {
   /// In id, this message translates to:
   /// **'Pilih Gambar'**
   String get lbl_pickImage;
+
+  /// No description provided for @lbl_activeDevice.
+  ///
+  /// In id, this message translates to:
+  /// **'Perangkat Aktif'**
+  String get lbl_activeDevice;
+
+  /// No description provided for @lbl_availableDevices.
+  ///
+  /// In id, this message translates to:
+  /// **'Perangkat Tersedia'**
+  String get lbl_availableDevices;
+
+  /// No description provided for @lbl_active.
+  ///
+  /// In id, this message translates to:
+  /// **'Aktif'**
+  String get lbl_active;
+
+  /// No description provided for @lbl_ipAddress.
+  ///
+  /// In id, this message translates to:
+  /// **'Alamat IP'**
+  String get lbl_ipAddress;
 
   /// No description provided for @err_invalidEmail.
   ///

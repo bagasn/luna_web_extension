@@ -1,5 +1,6 @@
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:web_extension/shared/data/printer_device.dart';
 
 abstract class _KEY {
   static const String bluetoothAddress = 'printer_bluetooth_device_address';
@@ -26,4 +27,13 @@ class PrinterBluetoothDevicePreferences {
   Future<String?> getAddress() => _preferences.getString(_KEY.bluetoothAddress);
 
   Future<String?> getName() => _preferences.getString(_KEY.bluetoothName);
+
+  Future<PrinterDevice?> getActiveDevice() async {
+    final address = await getAddress();
+    final name = await getName();
+    if (address == null || address.isEmpty || name == null || name.isEmpty) {
+      return null;
+    }
+    return PrinterDevice(address: address, name: name);
+  }
 }

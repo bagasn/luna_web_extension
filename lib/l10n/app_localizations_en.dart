@@ -30,6 +30,18 @@ class AppLocalizationsEn extends AppLocalizations {
   String get title_filter => 'Filter';
 
   @override
+  String get title_printerSetting => 'Printer Settings';
+
+  @override
+  String get title_bluetoothPrinter => 'Bluetooth Printer';
+
+  @override
+  String get title_usbPrinter => 'USB Printer';
+
+  @override
+  String get title_networkPrinter => 'Network Printer (LAN)';
+
+  @override
   String get btn_needHelp => 'Butuh Bantuan';
 
   @override
@@ -66,6 +78,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get btn_skip => 'Lewati';
 
   @override
+  String get btn_scanPrinter => 'Scan Devices';
+
+  @override
+  String get btn_stopScan => 'Stop Scan';
+
+  @override
+  String get btn_setActive => 'Set Active';
+
+  @override
+  String get btn_removeActive => 'Remove Active';
+
+  @override
+  String get btn_testPrint => 'Test Print';
+
+  @override
   String get txt_server => 'Server';
 
   @override
@@ -76,6 +103,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get txt_paid => 'Dibayar';
+
+  @override
+  String get txt_printerSettingSubtitle =>
+      'Configure active Bluetooth and USB printer devices, and run test prints.';
+
+  @override
+  String get txt_noActivePrinter =>
+      'No printer device is currently set as active.';
+
+  @override
+  String get txt_noScannedDevices =>
+      'No devices found yet. Press Scan to search for devices.';
+
+  @override
+  String get txt_scanningDevices => 'Scanning for printer devices...';
+
+  @override
+  String get txt_networkPrinterDesc =>
+      'Network connection does not need to be set as an active device. Enter the printer IP address to run a Test Print.';
 
   @override
   String get lbl_shortTrillion => 'T';
@@ -97,6 +143,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get lbl_pickImage => 'Pilih Gambar';
+
+  @override
+  String get lbl_activeDevice => 'Active Device';
+
+  @override
+  String get lbl_availableDevices => 'Available Devices';
+
+  @override
+  String get lbl_active => 'Active';
+
+  @override
+  String get lbl_ipAddress => 'IP Address';
 
   @override
   String get err_invalidEmail => 'Alamat email tidak valid';
