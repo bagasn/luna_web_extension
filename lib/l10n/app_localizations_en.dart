@@ -10,11 +10,11 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
-  String get app_name => 'Luna Dashboard';
+  String get app_name => 'Printer Extension';
 
   @override
   String get app_copyright =>
-      '© 2022 - PT LUNA Aplikasi Indonesia. All rights reserved.';
+      '© 2026 - PT LUNA Aplikasi Indonesia. All rights reserved.';
 
   @override
   String get app_lunaposBrandingText =>

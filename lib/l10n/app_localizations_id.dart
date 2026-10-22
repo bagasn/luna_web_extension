@@ -10,11 +10,11 @@ class AppLocalizationsId extends AppLocalizations {
   AppLocalizationsId([String locale = 'id']) : super(locale);
 
   @override
-  String get app_name => 'Luna Owner';
+  String get app_name => 'Printer Extension';
 
   @override
   String get app_copyright =>
-      '© 2022 - PT LUNA Aplikasi Indonesia. All rights reserved.';
+      '© 2026 - PT LUNA Aplikasi Indonesia. All rights reserved.';
 
   @override
   String get app_lunaposBrandingText =>

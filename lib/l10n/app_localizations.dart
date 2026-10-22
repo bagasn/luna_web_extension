@@ -101,13 +101,13 @@ abstract class AppLocalizations {
   /// No description provided for @app_name.
   ///
   /// In id, this message translates to:
-  /// **'Luna Owner'**
+  /// **'Printer Extension'**
   String get app_name;
 
   /// No description provided for @app_copyright.
   ///
   /// In id, this message translates to:
-  /// **'© 2022 - PT LUNA Aplikasi Indonesia. All rights reserved.'**
+  /// **'© 2026 - PT LUNA Aplikasi Indonesia. All rights reserved.'**
   String get app_copyright;
 
   /// No description provided for @app_lunaposBrandingText.

@@ -5,7 +5,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter_thermal_printer/flutter_thermal_printer.dart';
 import 'package:injectable/injectable.dart';
 import 'package:web_extension/core/dep_injections/injection_container.dart';
-import 'package:web_extension/shared/services/printer_service.dart';
+import 'package:web_extension/shared/services/printer/network_printer_service.dart';
 import 'package:web_extension/shared/services/socket_service.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 
@@ -22,9 +22,9 @@ class HomeCubit extends Cubit<HomeState> {
     }
   }
 
-  void onStartServer() {
+  void onStartServer() async {
     if (!_socketService.isRunning) {
-      _socketService.startServer();
+      await _socketService.startServer();
       emit(HomeState(isServerRunning: true));
     }
   }
@@ -37,7 +37,7 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void onTestPrint(String ipAddress) async {
-    final printer = locator<PrinterService>();
+    final printer = locator<NetworkPrinterService>();
 
     _socketService.addConsoleLog('Test print into $ipAddress:9100');
 
@@ -50,9 +50,7 @@ class HomeCubit extends Cubit<HomeState> {
 
       final bytes = <int>[
         ...generator.text('Test Print'),
-        ...generator.text('Test Print'),
-        ...generator.text('Test Print'),
-        ...generator.feed(2),
+        ...generator.feed(1),
         ...generator.cut(),
       ];
 

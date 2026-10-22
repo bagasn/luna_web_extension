@@ -35,7 +35,7 @@ class _ConsoleLogWidgetState extends State<ConsoleLogWidget> {
   }
 
   Widget _buildTextLog(ConsoleLogModel log) {
-    final style = TextStyle(fontSize: 13);
+    final style = TextStyle(fontSize: 14);
     return Container(
       padding: EdgeInsets.symmetric(vertical: 4),
       // decoration: BoxDecoration(

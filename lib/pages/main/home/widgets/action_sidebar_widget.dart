@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:web_extension/pages/home/cubit/home_cubit.dart';
+import 'package:web_extension/pages/main/home/cubit/home_cubit.dart';
 
 class ActionSidebarWidget extends StatefulWidget {
   const new({super.key});
@@ -10,8 +10,6 @@ class ActionSidebarWidget extends StatefulWidget {
 }
 
 class _ActionSidebarWidgetState extends State<ActionSidebarWidget> {
-  final _ipTextPrint = TextEditingController(text: '192.168.0.111');
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<HomeCubit, HomeState>(
@@ -30,6 +28,8 @@ class _ActionSidebarWidgetState extends State<ActionSidebarWidget> {
       },
     );
   }
+
+  final _ipTextPrint = TextEditingController(text: '192.168.0.111');
 
   Widget _buildTextPrintView(BuildContext context) {
     return Column(

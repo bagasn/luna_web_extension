@@ -3,30 +3,11 @@ import 'dart:io';
 import 'package:flutter_thermal_printer/flutter_thermal_printer.dart';
 import 'package:flutter_thermal_printer/network/network_print_result.dart';
 import 'package:injectable/injectable.dart';
+import 'package:web_extension/shared/constants/error/exceptions.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 
-enum PrintFailure {
-  invalidAddress,
-  invalidPort,
-  emptyData,
-  invalidData,
-  unreachable,
-  busy,
-  sendFailed,
-}
-
-class PrintException implements Exception {
-  const PrintException(this.failure, this.message);
-
-  final PrintFailure failure;
-  final String message;
-
-  @override
-  String toString() => message;
-}
-
 @singleton
-class PrinterService {
+class NetworkPrinterService {
   static const int defaultPort = 9100;
   static const Duration connectTimeout = Duration(seconds: 5);
 
@@ -42,22 +23,25 @@ class PrinterService {
         ip.trim().isEmpty ||
         InternetAddress.tryParse(ip.trim()) == null) {
       throw PrintException(
-        PrintFailure.invalidAddress,
+        PrintErrorType.invalidAddress,
         'Invalid printer IP address: $ip',
       );
     }
     if (port < 1 || port > 65535) {
       throw PrintException(
-        PrintFailure.invalidPort,
+        PrintErrorType.invalidPort,
         'Invalid printer port: $port',
       );
     }
     if (bytes.isEmpty) {
-      throw const PrintException(PrintFailure.emptyData, 'Print data is empty');
+      throw const PrintException(
+        PrintErrorType.emptyData,
+        'Print data is empty',
+      );
     }
     if (bytes.any((b) => b < 0 || b > 255)) {
       throw const PrintException(
-        PrintFailure.invalidData,
+        PrintErrorType.invalidData,
         'Print data contains values outside 0-255',
       );
     }
@@ -70,12 +54,12 @@ class PrinterService {
       socket.destroy();
     } on SocketException catch (error) {
       throw PrintException(
-        PrintFailure.unreachable,
+        PrintErrorType.unreachable,
         'Printer $ip:$port is unreachable: ${error.message}',
       );
     } on Exception catch (error) {
       throw PrintException(
-        PrintFailure.unreachable,
+        PrintErrorType.unreachable,
         'Printer $ip:$port is unreachable: $error',
       );
     }
@@ -93,7 +77,7 @@ class PrinterService {
     final key = '$address:$port';
     if (!_busyPrinters.add(key)) {
       throw PrintException(
-        PrintFailure.busy,
+        PrintErrorType.busy,
         'Printer $key is busy with another job',
       );
     }
@@ -108,7 +92,7 @@ class PrinterService {
       );
       final result = await printer.printTicket(bytes);
       if (result != NetworkPrintResult.success) {
-        throw PrintException(PrintFailure.sendFailed, result.msg);
+        throw PrintException(PrintErrorType.sendFailed, result.msg);
       }
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);

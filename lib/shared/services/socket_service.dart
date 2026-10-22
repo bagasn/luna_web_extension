@@ -7,7 +7,8 @@ import 'package:injectable/injectable.dart';
 import 'package:shelf/shelf.dart';
 import 'package:shelf/shelf_io.dart' as shelf_io;
 import 'package:shelf_web_socket/shelf_web_socket.dart';
-import 'package:web_extension/shared/services/printer_service.dart';
+import 'package:web_extension/shared/constants/error/exceptions.dart';
+import 'package:web_extension/shared/services/printer/network_printer_service.dart';
 import 'package:web_extension/shared/utilities/date_formatter.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
@@ -16,7 +17,7 @@ import 'package:web_socket_channel/web_socket_channel.dart';
 class WebSocketService extends ChangeNotifier {
   WebSocketService(this._printerService);
 
-  final PrinterService _printerService;
+  final NetworkPrinterService _printerService;
 
   HttpServer? _server;
   bool get isRunning => _server != null;
@@ -96,7 +97,7 @@ class WebSocketService extends ChangeNotifier {
         jsonEncode({
           'status': 'failed',
           'message': error.message,
-          'code': error.failure.name,
+          'code': error.errorType.name,
         }),
       );
     } catch (error, stackTrace) {
@@ -118,7 +119,10 @@ class WebSocketService extends ChangeNotifier {
 
   void addConsoleLog(String message) {
     try {
-      final dateValue = DateFormatter.dateToString(DateTime.now());
+      final dateValue = DateFormatter.dateToString(
+        DateTime.now(),
+        pattern: 'dd/MM HH:mm:ss',
+      );
       _consoleLogs.add(ConsoleLogModel(createAt: dateValue, message: message));
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
