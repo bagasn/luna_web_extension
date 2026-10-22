@@ -19,42 +19,10 @@ class _ActionSidebarWidgetState extends State<ActionSidebarWidget> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             spacing: 24,
-            children: [
-              _buildSocketTriggerView(state, context),
-              _buildTextPrintView(context),
-            ],
+            children: [_buildSocketTriggerView(state, context)],
           ),
         );
       },
-    );
-  }
-
-  final _ipTextPrint = TextEditingController(text: '192.168.0.111');
-
-  Widget _buildTextPrintView(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Text(
-          'Test Print',
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.w500),
-        ),
-        Divider(),
-        TextField(
-          controller: _ipTextPrint,
-          decoration: InputDecoration(
-            label: Text('IP Address'),
-            border: OutlineInputBorder(),
-          ),
-        ),
-        SizedBox(height: 6),
-        FilledButton(
-          onPressed: () {
-            context.read<HomeCubit>().onTestPrint(_ipTextPrint.text);
-          },
-          child: Text('Test Print'),
-        ),
-      ],
     );
   }
 
