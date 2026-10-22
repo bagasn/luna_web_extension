@@ -19,5 +19,8 @@
   "lbl_activeDevice": "Active Device",
   "lbl_availableDevices": "Available Devices",
   "lbl_active": "Active",
+  "lbl_serverPort": "Server Port",
+  "txt_serverPortHint": "The port the web app uses to connect to this local server.",
+  "err_invalidPort": "Port must be a number between 1024 - 65535",
   "lbl_ipAddress": "IP Address"
 }

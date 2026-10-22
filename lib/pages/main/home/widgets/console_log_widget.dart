@@ -35,25 +35,38 @@ class _ConsoleLogWidgetState extends State<ConsoleLogWidget> {
   }
 
   Widget _buildTextLog(ConsoleLogModel log) {
+    Color logColor;
+    switch (log.type) {
+      case ConsoleLogType.debug:
+        logColor = Colors.green.shade400;
+        break;
+      case ConsoleLogType.info:
+        logColor = Colors.blue.shade400;
+        break;
+      case ConsoleLogType.error:
+        logColor = Colors.red.shade400;
+        break;
+    }
     final style = TextStyle(fontSize: 14);
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 4),
-      // decoration: BoxDecoration(
-      //   border: Border(bottom: BorderSide(color: AppColors.charcoal400)),
-      // ),
+      padding: EdgeInsets.symmetric(vertical: 2),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 16,
         children: [
-          Text(
-            log.createAt,
-            style: style.copyWith(color: AppColors.charcoal500),
+          SizedBox(
+            width: 115,
+            child: Text(
+              log.createAt,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: style.copyWith(color: AppColors.charcoal500),
+            ),
           ),
           Expanded(
             child: SelectableText(
               log.message,
               selectionColor: Colors.white,
-              style: style.copyWith(color: Colors.blue),
+              style: style.copyWith(color: logColor),
             ),
           ),
         ],

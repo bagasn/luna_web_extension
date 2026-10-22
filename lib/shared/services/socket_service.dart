@@ -13,6 +13,20 @@ import 'package:web_extension/shared/utilities/date_formatter.dart';
 import 'package:web_extension/shared/utilities/log_util.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
 
+enum ConsoleLogType { debug, info, error }
+
+class ConsoleLogModel {
+  final String createAt;
+  final String message;
+  final ConsoleLogType type;
+
+  const new({
+    required this.createAt,
+    required this.message,
+    this.type = ConsoleLogType.info,
+  });
+}
+
 @singleton
 class WebSocketService extends ChangeNotifier {
   WebSocketService(this._printerService);
@@ -130,11 +144,4 @@ class WebSocketService extends ChangeNotifier {
       notifyListeners();
     }
   }
-}
-
-class ConsoleLogModel {
-  final String createAt;
-  final String message;
-
-  const new({required this.createAt, required this.message});
 }

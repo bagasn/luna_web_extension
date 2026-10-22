@@ -46,6 +46,9 @@
   "lbl_activeDevice": "Perangkat Aktif",
   "lbl_availableDevices": "Perangkat Tersedia",
   "lbl_active": "Aktif",
+  "lbl_serverPort": "Port Server",
+  "txt_serverPortHint": "Port yang digunakan web app untuk terhubung ke server lokal ini.",
+  "err_invalidPort": "Port harus berupa angka 1024 - 65535",
   "lbl_ipAddress": "Alamat IP",
   "err_invalidEmail": "Alamat email tidak valid"
 }

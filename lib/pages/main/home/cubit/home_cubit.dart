@@ -1,73 +1,67 @@
-import 'dart:io';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter_thermal_printer/flutter_thermal_printer.dart';
 import 'package:injectable/injectable.dart';
-import 'package:web_extension/core/dep_injections/injection_container.dart';
-import 'package:web_extension/shared/services/printer/network_printer_service.dart';
+import 'package:web_extension/core/local_storage/setting_preferences.dart';
 import 'package:web_extension/shared/services/socket_service.dart';
-import 'package:web_extension/shared/utilities/log_util.dart';
 
 part 'home_state.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {
+  static const int defaultPort = 8921;
+  static const int minPort = 1024;
+  static const int maxPort = 65535;
+
   final WebSocketService _socketService;
+  final SettingPreferences _settingPreferences;
 
-  HomeCubit({required this._socketService})
-    : super(HomeState(isServerRunning: false)) {
+  HomeCubit({
+    required this._socketService,
+    required this._settingPreferences,
+  }) : super(HomeState(isServerRunning: false)) {
     if (_socketService.isRunning) {
-      emit(HomeState(isServerRunning: true));
+      emit(state.copyWith(isServerRunning: true));
     }
+    _loadPort();
   }
 
-  void onStartServer() async {
-    if (!_socketService.isRunning) {
-      await _socketService.startServer();
-      emit(HomeState(isServerRunning: true));
-    }
+  Future<void> _loadPort() async {
+    final port = await _settingPreferences.getLastServerPort();
+    if (!isClosed) emit(state.copyWith(port: port));
   }
 
-  void onStopServer() {
+  /// Returns `true` if [port] is a valid usable port number.
+  static bool isValidPort(int? port) =>
+      port != null && port >= minPort && port <= maxPort;
+
+  /// Empty input (null) is allowed and falls back to [defaultPort].
+  static bool isValidInput(int? port) => port == null || isValidPort(port);
+
+  void onPortChanged(int? port) {
+    if (state.isServerRunning) return;
+    emit(state.copyWith(port: port, clearPort: port == null));
+  }
+
+  bool get canStart => !state.isServerRunning && isValidInput(state.port);
+
+  Future<void> onStartServer() async {
+    final inputPort = state.port;
+    if (_socketService.isRunning || !isValidInput(inputPort)) return;
+    final port = inputPort ?? defaultPort;
+
+    await _socketService.startServer(port: port);
     if (_socketService.isRunning) {
-      _socketService.stopServer();
-      emit(HomeState(isServerRunning: false));
+      await _settingPreferences.setLastServerPort(port);
+    }
+    if (!isClosed) {
+      emit(state.copyWith(isServerRunning: _socketService.isRunning));
     }
   }
 
-  void onTestPrint(String ipAddress) async {
-    final printer = locator<NetworkPrinterService>();
-
-    _socketService.addConsoleLog('Test print into $ipAddress:9100');
-
-    try {
-      // await printer.checkConnection(ipAddress);
-      // _socketService.addConsoleLog('Test connection to $ipAddress is success');
-
-      final profile = await CapabilityProfile.load();
-      final generator = Generator(PaperSize.mm58, profile);
-
-      final bytes = <int>[
-        ...generator.text('Test Print'),
-        ...generator.feed(1),
-        ...generator.cut(),
-      ];
-
-      final socket = await Socket.connect(
-        ipAddress,
-        9100,
-        timeout: const Duration(seconds: 5),
-      );
-
-      socket.add(bytes);
-      await socket.flush();
-      await socket.close();
-
-      _socketService.addConsoleLog('Print is Success');
-    } catch (error, stackTrace) {
-      LogUtil.e(error.toString(), stackTrace: stackTrace);
-      _socketService.addConsoleLog('Test Print Failed.\n$error');
+  Future<void> onStopServer() async {
+    if (_socketService.isRunning) {
+      await _socketService.stopServer();
+      emit(state.copyWith(isServerRunning: false));
     }
   }
 }

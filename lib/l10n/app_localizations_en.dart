@@ -154,6 +154,16 @@ class AppLocalizationsEn extends AppLocalizations {
   String get lbl_active => 'Active';
 
   @override
+  String get lbl_serverPort => 'Server Port';
+
+  @override
+  String get txt_serverPortHint =>
+      'The port the web app uses to connect to this local server.';
+
+  @override
+  String get err_invalidPort => 'Port must be a number between 1024 - 65535';
+
+  @override
   String get lbl_ipAddress => 'IP Address';
 
   @override

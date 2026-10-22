@@ -154,6 +154,16 @@ class AppLocalizationsId extends AppLocalizations {
   String get lbl_active => 'Aktif';
 
   @override
+  String get lbl_serverPort => 'Port Server';
+
+  @override
+  String get txt_serverPortHint =>
+      'Port yang digunakan web app untuk terhubung ke server lokal ini.';
+
+  @override
+  String get err_invalidPort => 'Port harus berupa angka 1024 - 65535';
+
+  @override
   String get lbl_ipAddress => 'Alamat IP';
 
   @override

@@ -374,6 +374,24 @@ abstract class AppLocalizations {
   /// **'Aktif'**
   String get lbl_active;
 
+  /// No description provided for @lbl_serverPort.
+  ///
+  /// In id, this message translates to:
+  /// **'Port Server'**
+  String get lbl_serverPort;
+
+  /// No description provided for @txt_serverPortHint.
+  ///
+  /// In id, this message translates to:
+  /// **'Port yang digunakan web app untuk terhubung ke server lokal ini.'**
+  String get txt_serverPortHint;
+
+  /// No description provided for @err_invalidPort.
+  ///
+  /// In id, this message translates to:
+  /// **'Port harus berupa angka 1024 - 65535'**
+  String get err_invalidPort;
+
   /// No description provided for @lbl_ipAddress.
   ///
   /// In id, this message translates to:

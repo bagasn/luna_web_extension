@@ -137,11 +137,16 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
         state.copyWith(
           activeBluetoothDevice: () => event.device,
           isSelectingBluetooth: false,
+          scannedBluetoothDevices: [],
           feedback: () => SettingFeedback.success(
             'Printer Bluetooth "${event.device.name}" berhasil diaktifkan',
           ),
         ),
       );
+
+      if (state.isScanningBluetooth) {
+        add(StopScanBluetoothDevicesEvent());
+      }
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       emit(
@@ -174,9 +179,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       emit(
-        state.copyWith(
-          feedback: () => SettingFeedback.error(error.toString()),
-        ),
+        state.copyWith(feedback: () => SettingFeedback.error(error.toString())),
       );
     }
   }
@@ -287,12 +290,17 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       emit(
         state.copyWith(
           activeUsbDevice: () => event.device,
+          scannedUsbDevices: [],
           isSelectingUsb: false,
           feedback: () => SettingFeedback.success(
             'Printer USB "${event.device.name}" berhasil diaktifkan',
           ),
         ),
       );
+
+      if (state.isScanningUsb) {
+        add(StopScanUsbDevicesEvent());
+      }
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       emit(
@@ -315,17 +323,14 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       emit(
         state.copyWith(
           activeUsbDevice: () => null,
-          feedback: () => SettingFeedback.success(
-            'Printer USB aktif berhasil dihapus',
-          ),
+          feedback: () =>
+              SettingFeedback.success('Printer USB aktif berhasil dihapus'),
         ),
       );
     } catch (error, stackTrace) {
       LogUtil.e(error.toString(), stackTrace: stackTrace);
       emit(
-        state.copyWith(
-          feedback: () => SettingFeedback.error(error.toString()),
-        ),
+        state.copyWith(feedback: () => SettingFeedback.error(error.toString())),
       );
     }
   }
@@ -379,9 +384,8 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       emit(
         state.copyWith(
           isTestingNetwork: false,
-          feedback: () => SettingFeedback.success(
-            'Test print Network ke "$ip" berhasil',
-          ),
+          feedback: () =>
+              SettingFeedback.success('Test print Network ke "$ip" berhasil'),
         ),
       );
     } catch (error, stackTrace) {

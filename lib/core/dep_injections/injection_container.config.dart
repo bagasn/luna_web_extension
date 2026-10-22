@@ -68,11 +68,14 @@ extension GetItInjectableX on _i174.GetIt {
         usbDevice: gh<_i248.PrinterUsbDevicePreferences>(),
       ),
     );
-    gh.factory<_i239.HomeCubit>(
-      () => _i239.HomeCubit(socketService: gh<_i1024.WebSocketService>()),
-    );
     gh.singleton<_i480.LanguageService>(
       () => _i480.LanguageService(gh<_i329.SettingPreferences>()),
+    );
+    gh.factory<_i239.HomeCubit>(
+      () => _i239.HomeCubit(
+        socketService: gh<_i1024.WebSocketService>(),
+        settingPreferences: gh<_i329.SettingPreferences>(),
+      ),
     );
     return this;
   }

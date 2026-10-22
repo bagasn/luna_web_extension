@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:web_extension/pages/main/home/cubit/home_cubit.dart';
+import 'package:web_extension/pages/main/home/widgets/server_port_field_widget.dart';
 
 class ActionSidebarWidget extends StatefulWidget {
   const new({super.key});
@@ -47,6 +48,8 @@ class _ActionSidebarWidgetState extends State<ActionSidebarWidget> {
             Text(state.isServerRunning ? 'Running' : 'Stop'),
           ],
         ),
+        SizedBox(height: 16),
+        ServerPortFieldWidget(),
         Container(
           alignment: Alignment.center,
           padding: EdgeInsets.only(top: 16),
@@ -60,14 +63,16 @@ class _ActionSidebarWidgetState extends State<ActionSidebarWidget> {
                   ? Colors.red.shade800
                   : Colors.green.shade800,
             ),
-            onPressed: () {
-              final bloc = context.read<HomeCubit>();
-              if (state.isServerRunning) {
-                bloc.onStopServer();
-              } else {
-                bloc.onStartServer();
-              }
-            },
+            onPressed: !state.isServerRunning && !HomeCubit.isValidInput(state.port)
+                ? null
+                : () {
+                    final bloc = context.read<HomeCubit>();
+                    if (state.isServerRunning) {
+                      bloc.onStopServer();
+                    } else {
+                      bloc.onStartServer();
+                    }
+                  },
             child: Text(state.isServerRunning ? 'Stop Server' : 'Start Server'),
           ),
         ),
