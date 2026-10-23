@@ -4,7 +4,7 @@ project(web_extension LANGUAGES CXX)
 
 # The name of the executable created for the application. Change this to change
 # the on-disk name of your application.
-set(BINARY_NAME "web_extension")
+set(BINARY_NAME "WebExtension")
 
 # Explicitly opt in to modern CMake behaviors to avoid warnings with recent
 # versions of CMake.

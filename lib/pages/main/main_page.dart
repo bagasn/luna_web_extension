@@ -50,7 +50,7 @@ class _MainViewState extends State<_MainView> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Container(
-            width: 82,
+            width: 80,
             decoration: BoxDecoration(color: AppColors.mainColor),
             child: Column(
               mainAxisSize: MainAxisSize.max,
@@ -108,7 +108,7 @@ class _NavItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final widgetSize = 82.0;
+    final widgetSize = 80.0;
 
     return InkWell(
       onTap: onTap,

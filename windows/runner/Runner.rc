@@ -89,13 +89,13 @@ BEGIN
     BEGIN
         BLOCK "040904e4"
         BEGIN
-            VALUE "CompanyName", "id.lunapos" "\0"
-            VALUE "FileDescription", "web_extension" "\0"
+            VALUE "CompanyName", "Luna POS Indonesia" "\0"
+            VALUE "FileDescription", "Luna Extension" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "web_extension" "\0"
-            VALUE "LegalCopyright", "Copyright (C) 2026 id.lunapos. All rights reserved." "\0"
-            VALUE "OriginalFilename", "web_extension.exe" "\0"
-            VALUE "ProductName", "web_extension" "\0"
+            VALUE "InternalName", "Luna Extension" "\0"
+            VALUE "LegalCopyright", "Copyright (C) 2026 PT. Luna POS Indonesia. All rights reserved." "\0"
+            VALUE "OriginalFilename", "LunaExtension.exe" "\0"
+            VALUE "ProductName", "Luna Extension" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END
